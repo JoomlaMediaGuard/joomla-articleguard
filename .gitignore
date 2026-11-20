@@ -1,0 +1,19 @@
+# Skrypty budujące paczki (uruchamiane tylko lokalnie)
+build.ps1
+build.sh
+
+# Wyjściowe pliki archiwów (powstają lokalnie lub na zewnątrz)
+*.zip
+
+# Pliki tymczasowe systemu macOS, Windows i OneDrive
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.tmp
+
+# Pliki konfiguracyjne edytorów
+.idea/
+.vscode/
+*.suo
+*.user

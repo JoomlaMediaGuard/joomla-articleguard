@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" version="4.0" method="upgrade">
+	<name>System - ArticleGuard</name>
+	<author>Marek Gajdziński, Gemini AI</author>
+	<authorEmail>joomla.mediaguard@gmail.com</authorEmail>
+	<authorUrl>https://github.com/JoomlaMediaGuard/joomla-articleguard</authorUrl>
+	<creationDate>20-11-2026</creationDate>
+	<copyright>(C) 2026 Marek Gajdziński</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>1.0.0</version>
+	<description>PLG_SYSTEM_ARTICLEGUARD_XML_DESCRIPTION</description>
+
+	<namespace path="src">JoomlaArticleGuard\Plugin\System\Articleguard</namespace>
+
+	<files>
+		<filename plugin="articleguard">articleguard.php</filename>
+		<folder>language</folder>
+		<folder>src</folder>
+		<folder>services</folder>
+	</files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field 
+                    name="protected_states" 
+                    type="list" 
+                    label="PLG_SYSTEM_ARTICLEGUARD_FIELD_PROTECTED_STATES_LABEL" 
+                    description="PLG_SYSTEM_ARTICLEGUARD_FIELD_PROTECTED_STATES_DESC"
+                    multiple="true"
+                    default="1"
+                    layout="joomla.form.field.list-fancy-select"
+                    validate="options"
+                    allowempty="true"
+                    message="PLG_SYSTEM_ARTICLEGUARD_FIELD_PROTECTED_STATES_ERROR"
+                >
+                    <option value="1">PLG_SYSTEM_ARTICLEGUARD_FIELD_STATES_OP_PUBLISHED</option>
+                    <option value="0">PLG_SYSTEM_ARTICLEGUARD_FIELD_STATES_OP_UNPUBLISHED</option>
+                    <option value="2">PLG_SYSTEM_ARTICLEGUARD_FIELD_STATES_OP_ARCHIVED</option>
+                    <option value="-2">PLG_SYSTEM_ARTICLEGUARD_FIELD_STATES_OP_TRASHED</option>
+                </field>
+				
+                <field
+                    name="privileged_groups"
+                    type="usergrouplist"
+                    label="PLG_SYSTEM_ARTICLEGUARD_FIELD_PRIVILEGED_GROUPS_LABEL"
+                    description="PLG_SYSTEM_ARTICLEGUARD_FIELD_PRIVILEGED_GROUPS_DESC"
+                    multiple="true"
+                    layout="joomla.form.field.list-fancy-select"
+                    validate="options"
+					allowempty="true"
+                    message="PLG_SYSTEM_ARTICLEGUARD_FIELD_PRIVILEGED_GROUPS_ERROR"
+                />
+
+                <field
+                    name="log_enabled"
+                    type="radio"
+                    label="PLG_SYSTEM_ARTICLEGUARD_FIELD_LOG_ENABLED_LABEL"
+                    description="PLG_SYSTEM_ARTICLEGUARD_FIELD_LOG_ENABLED_DESC"
+                    validate="options"
+                    message="PLG_SYSTEM_ARTICLEGUARD_FIELD_LOG_ENABLED_ERROR"
+                    default="0"
+                    class="btn-group btn-group-yesno"
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="ArticleGuard Updates">https://raw.githubusercontent.com/JoomlaMediaGuard/joomla-articleguard/main/update.xml</server>
+    </updateservers>
+</extension>

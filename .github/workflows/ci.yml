@@ -1,0 +1,39 @@
+name: ArticleGuard CI Checks
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-and-verify:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+
+    name: PHP ${{ matrix.php-version }} Syntax & Structure Check
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: none
+
+      - name: Check PHP syntax (php -l)
+        run: find . -type f -name "*.php" -not -path "./.git/*" -print0 | xargs -0 -n1 -P4 php -l
+
+      - name: Verify core extension files exist
+        run: |
+          test -f articleguard.xml
+          test -f articleguard.php
+          test -f services/provider.php
+          test -f src/Extension/Articleguard.php
+          test -f update.xml
+          echo "All core ArticleGuard files verified successfully!"
